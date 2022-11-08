@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private HealthSystem healthSystem;
+    //private float hp = 100f;
 
-    private float hp = 100f;
+    private void Awake()
+    {
+        healthSystem = new HealthSystem(100f);
+
+        healthSystem.OnDead += HealthSystem_OnDead;
+    }
+
+    private void HealthSystem_OnDead(object sender, System.EventArgs e)
+    {
+        // drop coin
+
+        Destroy(gameObject);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -25,7 +39,9 @@ public class Enemy : MonoBehaviour
         if(other.tag == "Bullet")
         {
             Bullet bullet = other.GetComponent<Bullet>();
-            //¥ý¦©¦å
+            //¥ý¦©¦å(¶Ë®`­È)
+            healthSystem.Damage(bullet.Attack_Damage);
+/*
             hp -= bullet.atk;
 
             Debug.Log(hp);
@@ -37,6 +53,7 @@ public class Enemy : MonoBehaviour
                 gameObject.SetActive(false);
                 Destroy(gameObject);
             }
+*/
         }
     }
 }
