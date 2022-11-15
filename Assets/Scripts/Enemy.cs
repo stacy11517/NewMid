@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private HealthSystem healthSystem;
-    //private float hp = 100f;
 
+    private HealthSystem healthSystem;
+    public float hp = 100f;
+
+
+    
+
+    
+    
     private void Awake()
     {
-        healthSystem = new HealthSystem(100f);
+        healthSystem = new HealthSystem(hp);
 
         healthSystem.OnDead += HealthSystem_OnDead;
     }
@@ -56,4 +62,5 @@ public class Enemy : MonoBehaviour
 */
         }
     }
+
 }
